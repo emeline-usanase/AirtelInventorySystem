@@ -13,7 +13,7 @@ public class DepartmentController {
     @Autowired
     private DepartmentRepository repo;
 
-    @GetMapping("/department")
+    @GetMapping("/departments")
     public String list(Model model){
         model.addAttribute("departments", repo.findAll());
         model.addAttribute("department", new Department());
