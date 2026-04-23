@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Departments</title>
+<style>
+body{font-family:Arial;padding:30px;background:#f4f4f4;}
+form,table{background:white;padding:20px;margin-bottom:20px;width:500px;}
+input{padding:10px;width:100%;margin:10px 0;}
+button{padding:10px;background:red;color:white;border:none;width:100%;}
+table{border-collapse:collapse;}
+th,td{padding:10px;border:1px solid #ccc;}
+th{background:red;color:white;}
+</style>
+</head>
+<body>
+
+<h2>Department Management</h2>
+
+<form action="/saveDepartment" method="post" th:object="${department}">
+<input type="text" th:field="*{departmentName}" placeholder="Department Name">
+<button type="submit">Save Department</button>
+</form>
+
+<table>
+<tr>
+<th>ID</th>
+<th>Name</th>
+</tr>
+
+<tr th:each="d : ${departments}">
+<td th:text="${d.id}"></td>
+<td th:text="${d.departmentName}"></td>
+</tr>
+
+</table>
+
+</body>
+</html>

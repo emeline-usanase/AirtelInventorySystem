@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Devices</title>
+<style>
+body{font-family:Arial;padding:30px;background:#f4f4f4;}
+form,table{background:white;padding:20px;width:900px;margin-bottom:20px;}
+input,select{width:100%;padding:10px;margin:10px 0;}
+button{padding:10px;background:red;color:white;border:none;width:100%;}
+table{border-collapse:collapse;}
+th,td{padding:10px;border:1px solid #ccc;}
+th{background:red;color:white;}
+</style>
+</head>
+<body>
+
+<h2>Device Management</h2>
+
+<form action="/saveDevice" method="post" th:object="${device}">
+
+<input type="text" th:field="*{serialNumber}" placeholder="Serial Number">
+
+<select th:field="*{type}">
+<option>Laptop</option>
+<option>Desktop</option>
+<option>Phone</option>
+<option>Tablet</option>
+</select>
+
+<input type="text" th:field="*{brand}" placeholder="Brand">
+<input type="text" th:field="*{model}" placeholder="Model">
+
+<select th:field="*{conditionStatus}">
+<option>Good</option>
+<option>Faulty</option>
+<option>Repair</option>
+</select>
+
+<select th:field="*{status}">
+<option>Available</option>
+<option>Assigned</option>
+<option>Lost</option>
+</select>
+
+<input type="date" th:field="*{purchaseDate}">
+
+<button type="submit">Save Device</button>
+
+</form>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Serial</th>
+<th>Type</th>
+<th>Brand</th>
+<th>Model</th>
+<th>Condition</th>
+<th>Status</th>
+<th>Purchase Date</th>
+</tr>
+
+<tr th:each="d : ${devices}">
+<td th:text="${d.id}"></td>
+<td th:text="${d.serialNumber}"></td>
+<td th:text="${d.type}"></td>
+<td th:text="${d.brand}"></td>
+<td th:text="${d.model}"></td>
+<td th:text="${d.conditionStatus}"></td>
+<td th:text="${d.status}"></td>
+<td th:text="${d.purchaseDate}"></td>
+</tr>
+
+</table>
+
+</body>
+</html>

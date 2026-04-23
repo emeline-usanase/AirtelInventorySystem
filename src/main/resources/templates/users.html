@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Users</title>
+<style>
+body{font-family:Arial;padding:30px;background:#f4f4f4;}
+form,table{background:white;padding:20px;width:700px;margin-bottom:20px;}
+input,select{width:100%;padding:10px;margin:10px 0;}
+button{padding:10px;background:red;color:white;border:none;width:100%;}
+table{border-collapse:collapse;}
+th,td{padding:10px;border:1px solid #ccc;}
+th{background:red;color:white;}
+</style>
+</head>
+<body>
+
+<h2>User Management</h2>
+
+<form action="/saveUser" method="post" th:object="${user}">
+
+<input type="text" th:field="*{fullName}" placeholder="Full Name">
+
+<input type="text" th:field="*{phone}" placeholder="Phone Number">
+
+<select th:field="*{airtelClient}">
+<option value="true">Yes Airtel Client</option>
+<option value="false">No</option>
+</select>
+
+<select th:field="*{department}">
+<option th:each="d : ${departments}"
+        th:value="${d.id}"
+        th:text="${d.departmentName}">
+</option>
+</select>
+
+<button type="submit">Save User</button>
+
+</form>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Phone</th>
+<th>Airtel Client</th>
+<th>Department</th>
+</tr>
+
+<tr th:each="u : ${users}">
+<td th:text="${u.id}"></td>
+<td th:text="${u.fullName}"></td>
+<td th:text="${u.phone}"></td>
+<td th:text="${u.airtelClient}"></td>
+<td th:text="${u.department.departmentName}"></td>
+</tr>
+
+</table>
+
+</body>
+</html>
