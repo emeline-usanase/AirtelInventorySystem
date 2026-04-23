@@ -16,7 +16,7 @@ th{background:red;color:white;}
 
 <h2>Device Management</h2>
 
-<form action="/saveDevice" method="post" th:object="${device}">
+<form th:action="@{/saveDevice}" method="post" th:object="${device}">
 
 <input type="text" th:field="*{serialNumber}" placeholder="Serial Number">
 
