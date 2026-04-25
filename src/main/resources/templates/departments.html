@@ -15,6 +15,7 @@ th{background:red;color:white;}
 <body>
 
 <h2>Department Management</h2>
+<p>enter your department</p>
 
 <form action="/saveDepartment" method="post" th:object="${department}">
 <input type="text" th:field="*{departmentName}" placeholder="Department Name">
