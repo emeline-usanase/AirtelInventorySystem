@@ -18,20 +18,47 @@ public class UserController {
     @Autowired
     private DepartmentRepository deptRepo;
 
+    // Open login page
+    @GetMapping("/")
+    public String home() {
+        return "login";
+    }
+
+    // Also allow /login URL
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "login";
+    }
+
+    // Process login
+    @PostMapping("/login")
+    public String login() {
+        return "dashboard";
+    }
+
+    // Dashboard page
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "dashboard";
+    }
+
+    // Show users page
     @GetMapping("/users")
-    public String users(Model model){
+    public String users(Model model) {
 
         model.addAttribute("user", new User());
         model.addAttribute("users", userRepo.findAll());
         model.addAttribute("departments", deptRepo.findAll());
 
-        return "users";
+        return "user/users";
     }
 
+    // Save user
     @PostMapping("/saveUser")
-    public String save(@ModelAttribute User user){
+    public String save(@ModelAttribute User user) {
 
         userRepo.save(user);
+
         return "redirect:/users";
     }
 }

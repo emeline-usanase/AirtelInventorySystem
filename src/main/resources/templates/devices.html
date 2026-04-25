@@ -1,45 +1,124 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Devices</title>
+<meta charset="UTF-8">
+<title>Device Management</title>
+
 <style>
-body{font-family:Arial;padding:30px;background:#f4f4f4;}
-form,table{background:white;padding:20px;width:900px;margin-bottom:20px;}
-input,select{width:100%;padding:10px;margin:10px 0;}
-button{padding:10px;background:red;color:white;border:none;width:100%;}
-table{border-collapse:collapse;}
-th,td{padding:10px;border:1px solid #ccc;}
-th{background:red;color:white;}
+body{
+    font-family:Arial;
+    background:#f4f4f4;
+    margin:0;
+    padding:30px;
+}
+
+.container{
+    width:95%;
+    margin:auto;
+}
+
+h2{
+    color:#d60000;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:8px;
+    margin-bottom:25px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+form{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+input,select{
+    padding:10px;
+    width:100%;
+}
+
+button{
+    grid-column:span 2;
+    padding:12px;
+    background:red;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:10px;
+    border:1px solid #ddd;
+    text-align:center;
+}
+
+th{
+    background:red;
+    color:white;
+}
+
+.edit{
+    background:green;
+    color:white;
+    padding:6px 10px;
+    text-decoration:none;
+}
+
+.delete{
+    background:red;
+    color:white;
+    padding:6px 10px;
+    text-decoration:none;
+}
 </style>
 </head>
+
 <body>
+
+<div class="container">
 
 <h2>Device Management</h2>
 
+<div class="card">
+
 <form th:action="@{/saveDevice}" method="post" th:object="${device}">
 
-<input type="text" th:field="*{serialNumber}" placeholder="Serial Number">
+<input type="hidden" th:field="*{id}">
+
+<input type="text" th:field="*{serialNumber}" placeholder="Serial Number" required>
 
 <select th:field="*{type}">
-<option>Laptop</option>
-<option>Desktop</option>
-<option>Phone</option>
-<option>Tablet</option>
+    <option value="">Select Type</option>
+    <option value="Laptop">Laptop</option>
+    <option value="Desktop">Desktop</option>
+    <option value="Phone">Phone</option>
+    <option value="Tablet">Tablet</option>
 </select>
 
 <input type="text" th:field="*{brand}" placeholder="Brand">
+
 <input type="text" th:field="*{model}" placeholder="Model">
 
 <select th:field="*{conditionStatus}">
-<option>Good</option>
-<option>Faulty</option>
-<option>Repair</option>
+    <option value="">Condition</option>
+    <option value="Good">Good</option>
+    <option value="Faulty">Faulty</option>
+    <option value="Repair">Repair</option>
 </select>
 
 <select th:field="*{status}">
-<option>Available</option>
-<option>Assigned</option>
-<option>Lost</option>
+    <option value="">Status</option>
+    <option value="Available">Available</option>
+    <option value="Assigned">Assigned</option>
+    <option value="Lost">Lost</option>
 </select>
 
 <input type="date" th:field="*{purchaseDate}">
@@ -47,6 +126,10 @@ th{background:red;color:white;}
 <button type="submit">Save Device</button>
 
 </form>
+
+</div>
+
+<div class="card">
 
 <table>
 
@@ -58,7 +141,8 @@ th{background:red;color:white;}
 <th>Model</th>
 <th>Condition</th>
 <th>Status</th>
-<th>Purchase Date</th>
+<th>Date</th>
+<th>Action</th>
 </tr>
 
 <tr th:each="d : ${devices}">
@@ -70,9 +154,20 @@ th{background:red;color:white;}
 <td th:text="${d.conditionStatus}"></td>
 <td th:text="${d.status}"></td>
 <td th:text="${d.purchaseDate}"></td>
+
+<td>
+<a th:href="@{/editDevice/{id}(id=${d.id})}" class="edit">Edit</a>
+<a th:href="@{/deleteDevice/{id}(id=${d.id})}" class="delete"
+onclick="return confirm('Delete this device?')">Delete</a>
+</td>
+
 </tr>
 
 </table>
+
+</div>
+
+</div>
 
 </body>
 </html>

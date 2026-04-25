@@ -14,8 +14,9 @@ public class DeviceController {
     @Autowired
     private DeviceRepository repo;
 
+    // Show all devices
     @GetMapping("/devices")
-    public String devices(Model model){
+    public String devices(Model model) {
 
         model.addAttribute("device", new Device());
         model.addAttribute("devices", repo.findAll());
@@ -23,11 +24,31 @@ public class DeviceController {
         return "devices";
     }
 
+    // Save device (create or update)
     @PostMapping("/saveDevice")
-    public String save(@ModelAttribute Device device){
+    public String save(@ModelAttribute Device device) {
 
         repo.save(device);
-
         return "redirect:/devices";
+    }
+
+    // Delete device
+    @GetMapping("/deleteDevice/{id}")
+    public String deleteDevice(@PathVariable Long id) {
+
+        repo.deleteById(id);
+        return "redirect:/devices";
+    }
+
+    // Edit device
+    @GetMapping("/editDevice/{id}")
+    public String editDevice(@PathVariable Long id, Model model) {
+
+        Device device = repo.findById(id).orElse(null);
+
+        model.addAttribute("device", device != null ? device : new Device());
+        model.addAttribute("devices", repo.findAll());
+
+        return "devices";
     }
 }

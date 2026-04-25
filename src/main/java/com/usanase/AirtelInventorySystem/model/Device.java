@@ -10,51 +10,61 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="devices")
+@Table(name = "device")
 public class Device {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    @Column(name="serial_number")
+    @Column(name = "serial_number", nullable = false, unique = true)
     private String serialNumber;
 
     private String type;
     private String brand;
     private String model;
 
-    @Column(name="condition_status")
+    @Column(name = "condition_status")
     private String conditionStatus;
 
     private String status;
 
-    @Column(name="purchase_date")
+    @Column(name = "purchase_date")
     private LocalDate purchaseDate;
 
-    public Device(){}
+    // Constructor
+    public Device() {}
 
-    public int getId(){ return id; }
-    public void setId(int id){ this.id=id; }
+    // Getters & Setters
+    public Long getId() { return id; }
 
-    public String getSerialNumber(){ return serialNumber; }
-    public void setSerialNumber(String serialNumber){ this.serialNumber=serialNumber; }
+    public void setId(Long id) { this.id = id; }
 
-    public String getType(){ return type; }
-    public void setType(String type){ this.type=type; }
+    public String getSerialNumber() { return serialNumber; }
 
-    public String getBrand(){ return brand; }
-    public void setBrand(String brand){ this.brand=brand; }
+    public void setSerialNumber(String serialNumber) { this.serialNumber = serialNumber; }
 
-    public String getModel(){ return model; }
-    public void setModel(String model){ this.model=model; }
+    public String getType() { return type; }
 
-    public String getConditionStatus(){ return conditionStatus; }
-    public void setConditionStatus(String conditionStatus){ this.conditionStatus=conditionStatus; }
+    public void setType(String type) { this.type = type; }
 
-    public String getStatus(){ return status; }
-    public void setStatus(String status){ this.status=status; }
+    public String getBrand() { return brand; }
 
-    public LocalDate getPurchaseDate(){ return purchaseDate; }
-    public void setPurchaseDate(LocalDate purchaseDate){ this.purchaseDate=purchaseDate; }
+    public void setBrand(String brand) { this.brand = brand; }
+
+    public String getModel() { return model; }
+
+    public void setModel(String model) { this.model = model; }
+
+    public String getConditionStatus() { return conditionStatus; }
+
+    public void setConditionStatus(String conditionStatus) { this.conditionStatus = conditionStatus; }
+
+    public String getStatus() { return status; }
+
+    public void setStatus(String status) { this.status = status; }
+
+    public LocalDate getPurchaseDate() { return purchaseDate; }
+
+    public void setPurchaseDate(LocalDate purchaseDate) { this.purchaseDate = purchaseDate; }
 }
