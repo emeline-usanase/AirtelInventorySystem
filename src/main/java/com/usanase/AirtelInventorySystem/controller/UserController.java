@@ -24,12 +24,6 @@ public class UserController {
         return "login";
     }
 
-    // Also allow /login URL
-    @GetMapping("/login")
-    public String showLoginForm() {
-        return "login";
-    }
-
     // Process login
     @PostMapping("/login")
     public String login() {
