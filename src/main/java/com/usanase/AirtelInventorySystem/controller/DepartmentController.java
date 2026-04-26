@@ -13,7 +13,11 @@ public class DepartmentController {
 
     @Autowired
     private DepartmentRepository repo;
-
+    
+    @GetMapping("/")
+    public String dashboard() {
+        return "dashboard";
+    }
     // Show departments page
     @GetMapping("/departments")
     public String list(Model model) {

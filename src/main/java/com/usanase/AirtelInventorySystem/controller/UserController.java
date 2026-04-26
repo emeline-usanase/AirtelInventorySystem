@@ -36,12 +36,6 @@ public class UserController {
         return "dashboard";
     }
 
-    // Dashboard page
-    @GetMapping("/dashboard")
-    public String dashboard() {
-        return "dashboard";
-    }
-
     // Show users page
     @GetMapping("/users")
     public String users(Model model) {
@@ -59,6 +53,6 @@ public class UserController {
 
         userRepo.save(user);
 
-        return "redirect:/users";
+        return "redirect:user/users";
     }
 }
