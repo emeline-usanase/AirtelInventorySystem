@@ -1,77 +1,193 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Airtel Inventory Management System</title>
 
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: #f4f6f9;
-        text-align: center;
-    }
+body{
+    font-family:Arial,sans-serif;
+    margin:0;
+    padding:0;
+    background:#f4f6f9;
+}
 
-    h1 {
-        background: #d90429;
-        color: white;
-        padding: 20px;
-        margin: 0;
-        font-size: 28px;
-        letter-spacing: 1px;
-    }
+h1{
+    background:#d90429;
+    color:white;
+    padding:20px;
+    margin:0;
+    text-align:center;
+}
 
-    ul {
-        list-style: none;
-        padding: 0;
-        margin-top: 50px;
-    }
+.menu{
+    text-align:center;
+    margin:30px 0;
+}
 
-    ul li {
-        margin: 20px 0;
-    }
+.menu a{
+    text-decoration:none;
+    background:#2b2d42;
+    color:white;
+    padding:12px 25px;
+    margin:10px;
+    border-radius:8px;
+    display:inline-block;
+}
 
-    ul li a {
-        text-decoration: none;
-        background: #2b2d42;
-        color: white;
-        padding: 12px 30px;
-        border-radius: 8px;
-        font-size: 18px;
-        transition: 0.3s;
-        display: inline-block;
-        width: 200px;
-    }
+.menu a:hover{
+    background:#ef233c;
+}
 
-    ul li a:hover {
-        background: #ef233c;
-        transform: scale(1.05);
-    }
+.container{
+    width:95%;
+    margin:auto;
+}
 
-    footer {
-        margin-top: 60px;
-        padding: 15px;
-        background: #2b2d42;
-        color: white;
-        font-size: 14px;
-    }
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:25px;
+    box-shadow:0 0 8px rgba(0,0,0,0.1);
+}
+
+h2{
+    color:#d90429;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+table,th,td{
+    border:1px solid #ddd;
+}
+
+th,td{
+    padding:10px;
+    text-align:center;
+}
+
+th{
+    background:#2b2d42;
+    color:white;
+}
+
+footer{
+    margin-top:40px;
+    padding:15px;
+    background:#2b2d42;
+    color:white;
+    text-align:center;
+}
 </style>
 
 </head>
-
 <body>
 
 <h1>Airtel Inventory Management System</h1>
 
-<ul>
-    <li><a href="users">User</a></li>
-    <li><a href="/devices">Device</a></li>
-    <li><a href="/departments">Department</a></li>
-</ul>
+<div class="menu">
+    <a href="/users">Add User</a>
+    <a href="/devices">Add Device</a>
+    <a href="/departments">Add Department</a>
+</div>
+
+<div class="container">
+
+<!-- USERS -->
+<div class="card">
+<h2>Users List</h2>
+
+<table>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Department</th>
+</tr>
+
+<tr th:each="u : ${users}">
+<td th:text="${u.id}"></td>
+<td th:text="${u.fullName}"></td>
+<td th:text="${u.email}"></td>
+<td th:text="${u.department.name}"></td>
+</tr>
+
+</table>
+</div>
+
+<!-- DEVICES -->
+<div class="card">
+<h2>Devices List</h2>
+
+<table>
+<tr>
+<th>ID</th>
+<th>Serial Number</th>
+<th>Type</th>
+<th>Brand</th>
+<th>Status</th>
+</tr>
+
+<tr th:each="d : ${devices}">
+<td th:text="${d.id}"></td>
+<td th:text="${d.serialNumber}"></td>
+<td th:text="${d.type}"></td>
+<td th:text="${d.brand}"></td>
+<td th:text="${d.status}"></td>
+</tr>
+
+</table>
+</div>
+
+<!-- DEPARTMENTS -->
+<div class="card">
+<h2>Departments List</h2>
+
+<table>
+<tr>
+<th>ID</th>
+<th>Department Name</th>
+</tr>
+
+<tr th:each="dep : ${departments}">
+<td th:text="${dep.id}"></td>
+<td th:text="${dep.name}"></td>
+</tr>
+
+</table>
+</div>
+
+<!-- RELATIONSHIP -->
+<div class="card">
+<h2>User - Device Relationship</h2>
+
+<table>
+<tr>
+<th>User</th>
+<th>Department</th>
+<th>Assigned Device</th>
+<th>Serial Number</th>
+</tr>
+
+<tr th:each="u : ${users}">
+<td th:text="${u.fullName}"></td>
+<td th:text="${u.department.name}"></td>
+<td th:text="${u.device.brand}"></td>
+<td th:text="${u.device.serialNumber}"></td>
+</tr>
+
+</table>
+</div>
+
+</div>
 
 <footer>
-    © 2026 Airtel Inventory System
+© 2026 Airtel Inventory System
 </footer>
 
 </body>

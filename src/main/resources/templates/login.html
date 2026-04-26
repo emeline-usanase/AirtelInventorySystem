@@ -2,22 +2,75 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Login</title>
+
 <style>
-body{font-family:Arial;background:#f4f4f4;padding:50px;}
-form{width:350px;margin:auto;background:white;padding:30px;border-radius:10px;}
-input{width:100%;padding:10px;margin:10px 0;}
-button{width:100%;padding:10px;background:red;color:white;border:none;}
+body{
+    font-family:Arial;
+    background:#f4f4f4;
+    padding:50px;
+}
+
+form{
+    width:350px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h2{
+    text-align:center;
+    color:red;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    background:red;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:darkred;
+}
+
+.error{
+    color:red;
+    text-align:center;
+}
 </style>
+
 </head>
 <body>
 
 <form method="post" action="/login">
+
 <h2>Airtel Login</h2>
 
-<input type="text" name="username" placeholder="Registration Number1">
-<input type="password" name="password" placeholder="Registration Number2">
+<p class="error" th:text="${error}"></p>
+
+<input type="text" name="username" placeholder="Registration Number1" required>
+
+<input type="password" name="password" placeholder="Registration Number2" required>
 
 <button type="submit">Login</button>
+
+</form>
+
+</body>
+</html>
 
 </form>
 
